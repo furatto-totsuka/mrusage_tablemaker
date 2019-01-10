@@ -1,0 +1,3 @@
+[submodule "uwstyle"]
+	path = uwstyle
+	url = https://github.com/TakamiChie/UWStyleMethods.git
