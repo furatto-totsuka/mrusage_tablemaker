@@ -40,7 +40,7 @@ def load():
     # Special Items
     d = r.cells(1).value #pywin32type/datetime
     data["day"] = datetime(d.year, d.month, d.day)
-    data["time"] = dividetime(data["day"], r.cells(3).value),
+    data["time"] = dividetime(data["day"], r.cells(3).value)
     data["resv"] = dividetime(data["day"], r.cells(5).value) if r.cells(5).value is not None else data["time"]
     datas.append(data)
 
