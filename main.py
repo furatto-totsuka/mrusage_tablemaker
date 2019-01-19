@@ -3,7 +3,7 @@ from uwstyle.dialogs import dialog, select
 from uwstyle.excel import Excel
 
 
-def load():
+def load(excel):
   def dividetime(baseday, timestr):
     ts = list(map(
       lambda p:
@@ -14,7 +14,6 @@ def load():
       "start": baseday + timedelta(hours=ts[0][0], minutes=ts[0][1]),
       "end": baseday + timedelta(hours=ts[1][0], minutes=ts[1][1]),
     }
-  excel = Excel()
   wb = excel.chooseworkbook()
   if wb is None:
     return None
@@ -46,7 +45,25 @@ def load():
 
   return datas
 
+def create_sheet(excel, data):
+  start = data[0]["day"]
+  ws = excel.add().sheets[0]
+  ws.name = "{0}月会議室利用状況".format(start.minute)
+  # Header
+  ws.cells(1, 1).value = "日"
+  ws.cells(1, 2).value = "曜日"
+  d = t = start
+  t += timedelta(hours=10)
+  for i in range(14):
+    ws.cells(1, 3 + i).value = "{0:%H:%M}".format(t)
+    t += timedelta(minutes=30)
+
+  ws.cells(1, 18).value = "備考"
+
+
 if __name__ == "__main__":
-  data = load()
+  excel = Excel()
+  data = load(excel)
   if data is None:
     exit
+  create_sheet(excel, data)
