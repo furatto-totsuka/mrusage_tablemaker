@@ -49,6 +49,7 @@ def load(excel):
   return datas
 
 def create_sheet(excel, data):
+  timelist = list(map(lambda i: i["resv"], data))
   d = data[0]["day"]
   print("> データ出力中")
   start = datetime(d.year, d.month, 1)
