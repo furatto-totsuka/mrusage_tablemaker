@@ -53,7 +53,7 @@ def create_sheet(excel, data):
   d = data[0]["day"]
   print("> データ出力中")
   start = datetime(d.year, d.month, 1)
-  ws = excel.add().sheets[0]
+  ws = excel.add_workbook().sheets[0]
   ws.name = "{0}月会議室利用状況".format(start.month)
   # Header
   ws.cells(1, 1).value = "日"
