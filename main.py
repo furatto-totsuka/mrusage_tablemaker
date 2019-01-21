@@ -48,7 +48,9 @@ def load(excel):
   return datas
 
 def create_sheet(excel, data):
+  d = data[0]["day"]
   print("> データ出力中")
+  start = datetime(d.year, d.month, 1)
   ws = excel.add().sheets[0]
   ws.name = "{0}月会議室利用状況".format(start.minute)
   # Header
