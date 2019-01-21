@@ -57,11 +57,35 @@ def create_sheet(excel, data):
   ws.cells(1, 1).value = "日"
   d = t = start
   t += timedelta(hours=10)
-  for i in range(14):
-    ws.cells(1, 3 + i).value = "{0:%H:%M}".format(t)
+  if "header":
+    r = 2
+    while t.hour < 17:
+      ws.cells(1, r).value = "{0:%H:%M}".format(t)
+      r += 1
+      t += timedelta(minutes=30)
+    ws.cells(1, r).value = "備考"
+
+  if "rows":
+    c = 2
+    while d.month == start.month:
+      print("{0:%m/%d}".format(d))
+      ws.cells(c, 1).value = "{0:%Y/%m/%d}".format(d)
+      ws.cells(c, 1).numberFormatLocal = "m/d(aaa);@"
+      t = d
+      t += timedelta(hours=10)
+      r = 2
+      while t.hour < 17:
+        ws.cells(c, r).value = "○"
+        ws.cells(c, r).horizontalAlignment = -4108
+        r += 1
     t += timedelta(minutes=30)
 
-  ws.cells(1, 18).value = "備考"
+      c += 1
+      d += timedelta(days=1)
+
+  lo = ws.raw.listObjects.add(1, ws.cells(1, 1).currentRegion, None, 1)
+  lo.showAutoFilterDropDown = False
+
 
 
 if __name__ == "__main__":
