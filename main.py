@@ -23,6 +23,7 @@ def load(excel):
   table = ws.cells(1, 1).currentRegion
   datas = []
   first = True
+  print("> データ読み込み中")
   for r in table.rows:
     if first:
       first = False
@@ -41,12 +42,13 @@ def load(excel):
     data["day"] = datetime(d.year, d.month, d.day)
     data["time"] = dividetime(data["day"], r.cells(3).value)
     data["resv"] = dividetime(data["day"], r.cells(5).value) if r.cells(5).value is not None else data["time"]
+    print("{0:%m/%d} {1}".format(data["day"], data["name"]))
     datas.append(data)
 
   return datas
 
 def create_sheet(excel, data):
-  start = data[0]["day"]
+  print("> データ出力中")
   ws = excel.add().sheets[0]
   ws.name = "{0}月会議室利用状況".format(start.minute)
   # Header
