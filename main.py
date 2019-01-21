@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from datetimerange import DateTimeRange
 from uwstyle.dialogs import dialog, select
 from uwstyle.excel import Excel
 
@@ -10,10 +11,10 @@ def load(excel):
         list(map(lambda n: int(n), p.split(":"))),
       timestr.split("～")
     ))
-    return {
-      "start": baseday + timedelta(hours=ts[0][0], minutes=ts[0][1]),
-      "end": baseday + timedelta(hours=ts[1][0], minutes=ts[1][1]),
-    }
+    return DateTimeRange(
+      baseday + timedelta(hours=ts[0][0], minutes=ts[0][1]),
+      baseday + timedelta(hours=ts[1][0], minutes=ts[1][1]))
+
   wb = excel.chooseworkbook()
   if wb is None:
     return None
@@ -78,7 +79,7 @@ def create_sheet(excel, data):
         ws.cells(c, r).value = "○"
         ws.cells(c, r).horizontalAlignment = -4108
         r += 1
-    t += timedelta(minutes=30)
+        t += timedelta(minutes=30)
 
       c += 1
       d += timedelta(days=1)
