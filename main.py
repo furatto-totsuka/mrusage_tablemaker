@@ -55,7 +55,6 @@ def create_sheet(excel, data):
   ws.name = "{0}月会議室利用状況".format(start.minute)
   # Header
   ws.cells(1, 1).value = "日"
-  ws.cells(1, 2).value = "曜日"
   d = t = start
   t += timedelta(hours=10)
   for i in range(14):
