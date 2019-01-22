@@ -3,7 +3,8 @@ from datetimerange import DateTimeRange
 from uwstyle.dialogs import dialog, select
 from uwstyle.excel import Excel
 
-
+WD_CLOSED = 3
+xlThemeColorAccent2 = 6
 def load(excel):
   def dividetime(baseday, timestr):
     ts = list(map(
@@ -74,15 +75,23 @@ def create_sheet(excel, data):
       print("{0:%m/%d}".format(d))
       ws.cells(c, 1).value = "{0:%Y/%m/%d}".format(d)
       ws.cells(c, 1).numberFormatLocal = "m/d(aaa);@"
-      t = d
-      t += timedelta(hours=10)
-      r = 2
-      while t.hour < 17:
-        ws.cells(c, r).value = "●" \
-          if any(t in tl for tl in timelist) else "○"
-        ws.cells(c, r).horizontalAlignment = -4108
-        r += 1
-        t += timedelta(minutes=30)
+      if d.weekday() == WD_CLOSED:
+        ws.cells(c, 16).value = "休日"
+        ws.cells(c, 16).horizontalAlignment = -4108
+        ws.raw.Range(ws.cells(c, 2), ws.cells(c, 16)) \
+          .interior.themeColor = xlThemeColorAccent2
+        ws.raw.Range(ws.cells(c, 2), ws.cells(c, 16)) \
+          .interior.tintAndShade = 0.599993896298105
+      else:
+        t = d
+        t += timedelta(hours=10)
+        r = 2
+        while t.hour < 17:
+          ws.cells(c, r).value = "●" \
+            if any(t in tl for tl in timelist) else "○"
+          ws.cells(c, r).horizontalAlignment = -4108
+          r += 1
+          t += timedelta(minutes=30)
 
       c += 1
       d += timedelta(days=1)
@@ -100,6 +109,6 @@ if __name__ == "__main__":
     exit
   excel.excel.screenUpdating = False
   try:
-  create_sheet(excel, data)
+    create_sheet(excel, data)
   finally:
     excel.excel.screenUpdating = True
