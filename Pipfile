@@ -11,6 +11,7 @@ v = {editable = true,version = "*"}
 datetimerange = "*"
 "pywin32" = "*"
 uwstyle = "*"
+python-dateutil = "*"
 
 [requires]
 python_version = "3.7"
