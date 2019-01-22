@@ -63,6 +63,7 @@ def create_sheet(excel, data):
     r = 2
     while t.hour < 17:
       ws.cells(1, r).value = "{0:%H:%M}".format(t)
+      ws.cells(1, r).horizontalAlignment = -4108
       r += 1
       t += timedelta(minutes=30)
     ws.cells(1, r).value = "備考"
