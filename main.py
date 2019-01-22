@@ -98,4 +98,8 @@ if __name__ == "__main__":
   data = load(excel)
   if data is None:
     exit
+  excel.excel.screenUpdating = False
+  try:
   create_sheet(excel, data)
+  finally:
+    excel.excel.screenUpdating = True
