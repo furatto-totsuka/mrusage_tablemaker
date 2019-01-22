@@ -78,7 +78,8 @@ def create_sheet(excel, data):
       t += timedelta(hours=10)
       r = 2
       while t.hour < 17:
-        ws.cells(c, r).value = "○"
+        ws.cells(c, r).value = "●" \
+          if any(t in tl for tl in timelist) else "○"
         ws.cells(c, r).horizontalAlignment = -4108
         r += 1
         t += timedelta(minutes=30)
