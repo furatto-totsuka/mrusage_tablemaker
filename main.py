@@ -5,6 +5,7 @@ from uwstyle.excel import Excel
 
 WD_CLOSED = 3
 xlThemeColorAccent2 = 6
+xlCenter = -4108
 def load(excel):
   def dividetime(baseday, timestr):
     ts = list(map(
@@ -64,7 +65,7 @@ def create_sheet(excel, data):
     r = 2
     while t.hour < 17:
       ws.cells(1, r).value = "{0:%H:%M}".format(t)
-      ws.cells(1, r).horizontalAlignment = -4108
+      ws.cells(1, r).horizontalAlignment = xlCenter
       r += 1
       t += timedelta(minutes=30)
     ws.cells(1, r).value = "備考"
@@ -77,7 +78,7 @@ def create_sheet(excel, data):
       ws.cells(c, 1).numberFormatLocal = "m/d(aaa);@"
       if d.weekday() == WD_CLOSED:
         ws.cells(c, 16).value = "休日"
-        ws.cells(c, 16).horizontalAlignment = -4108
+        ws.cells(c, 16).horizontalAlignment = xlCenter
         ws.raw.Range(ws.cells(c, 2), ws.cells(c, 16)) \
           .interior.themeColor = xlThemeColorAccent2
         ws.raw.Range(ws.cells(c, 2), ws.cells(c, 16)) \
@@ -89,7 +90,7 @@ def create_sheet(excel, data):
         while t.hour < 17:
           ws.cells(c, r).value = "●" \
             if any(t in tl for tl in timelist) else "○"
-          ws.cells(c, r).horizontalAlignment = -4108
+          ws.cells(c, r).horizontalAlignment = xlCenter
           r += 1
           t += timedelta(minutes=30)
 
