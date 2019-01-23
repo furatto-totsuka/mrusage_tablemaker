@@ -46,6 +46,7 @@ def load(excel):
     data["time"] = dividetime(data["day"], r.cells(4).value)
     data["resv"] = dividetime(data["day"], r.cells(6).value) if r.cells(6).value is not None else data["time"]
     print("{0:%m/%d} {1}".format(data["day"], data["name"]))
+    if data["note"] is None or not "ホール" in data["note"]:
     datas.append(data)
 
   return datas
