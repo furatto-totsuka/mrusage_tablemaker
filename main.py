@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 from datetimerange import DateTimeRange
-import re
 from uwstyle.dialogs import dialog, select
 from uwstyle.excel import Excel
 
@@ -48,7 +47,7 @@ def load(excel):
     data["resv"] = dividetime(data["day"], r.cells(6).value) if r.cells(6).value is not None else data["time"]
     print("{0:%m/%d} {1}".format(data["day"], data["name"]))
     if data["note"] is None or not "ホール" in data["note"]:
-      datas.append(data)
+    datas.append(data)
 
   return datas
 
