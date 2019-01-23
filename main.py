@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from datetimerange import DateTimeRange
+import re
 from uwstyle.dialogs import dialog, select
 from uwstyle.excel import Excel
 
@@ -47,7 +48,7 @@ def load(excel):
     data["resv"] = dividetime(data["day"], r.cells(6).value) if r.cells(6).value is not None else data["time"]
     print("{0:%m/%d} {1}".format(data["day"], data["name"]))
     if data["note"] is None or not "ホール" in data["note"]:
-    datas.append(data)
+      datas.append(data)
 
   return datas
 
@@ -97,6 +98,10 @@ def create_sheet(excel, data):
 
       c += 1
       d += timedelta(days=1)
+
+    ws.cells(c + 1, 2).value = "凡例"
+    ws.cells(c + 2, 2).value = "●＝予約あり"
+    ws.cells(c + 3, 2).value = "○＝予約なし"
 
   lo = ws.raw.listObjects.add(1, ws.cells(1, 1).currentRegion, None, 1)
   lo.showAutoFilterDropDown = False
