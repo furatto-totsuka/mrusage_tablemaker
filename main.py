@@ -35,16 +35,16 @@ def load(excel):
       continue
     # Collect Items
     data = {
-      "week": r.cells(2).value,
-      "name": r.cells(4).value,
-      "category": r.cells(6).value,
-      "note": r.cells(7).value,
+      "week": r.cells(3).value,
+      "name": r.cells(5).value,
+      "category": r.cells(7).value,
+      "note": r.cells(8).value,
     }
     # Special Items
     d = r.cells(1).value #pywin32type/datetime
     data["day"] = datetime(d.year, d.month, d.day)
-    data["time"] = dividetime(data["day"], r.cells(3).value)
-    data["resv"] = dividetime(data["day"], r.cells(5).value) if r.cells(5).value is not None else data["time"]
+    data["time"] = dividetime(data["day"], r.cells(4).value)
+    data["resv"] = dividetime(data["day"], r.cells(6).value) if r.cells(6).value is not None else data["time"]
     print("{0:%m/%d} {1}".format(data["day"], data["name"]))
     datas.append(data)
 
