@@ -8,7 +8,15 @@ xlThemeColorAccent2 = 6
 xlCenter = -4108
 
 def create_sheet(excel, data):
-  timelist = list(map(lambda i: i["resv"], data))
+  timelist = list(
+    map(
+      lambda i: i["resv"],
+      filter(
+        lambda i: i["note"] is None or not "ホール" in i["note"],
+        data
+      )
+    )
+  )
   d = data[0]["day"]
   print("> データ出力中")
   start = datetime(d.year, d.month, 1)
