@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from datetimerange import DateTimeRange
+import re
 
 def load(excel):
   def dividetime(baseday, timestr):
@@ -22,11 +23,12 @@ def load(excel):
   datas = []
   first = True
   print("> データ読み込み中")
+  holiday = re.compile('定\s*休\s*日')
   for r in table.rows:
     if first:
       first = False
       continue
-    if r.cells(3).mergecells or r.cells(5).value == "定休日":
+    if holiday.match(r.cells(4).value):
       continue
     # Collect Items
     data = {
