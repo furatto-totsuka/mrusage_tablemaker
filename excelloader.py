@@ -32,7 +32,7 @@ def load(excel):
     data = {
       "week": r.cells(3).value,
       "name": r.cells(5).value,
-      "category": r.cells(7).value,
+      "category": "" if r.cells(7).value is None else r.cells(7).value,
       "note": r.cells(8).value,
     }
     # Special Items
