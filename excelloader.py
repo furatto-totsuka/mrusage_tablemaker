@@ -28,7 +28,7 @@ def load(excel):
     if first:
       first = False
       continue
-    if holiday.match(r.cells(4).value):
+    if r.cells(4).value is None or holiday.match(r.cells(4).value):
       continue
     # Collect Items
     data = {
