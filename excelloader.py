@@ -4,6 +4,7 @@ import re
 
 def load(excel):
   def dividetime(baseday, timestr):
+    try:
     ts = list(map(
       lambda p:
         list(map(lambda n: int(n), p.split(":"))),
@@ -12,6 +13,8 @@ def load(excel):
     return DateTimeRange(
       baseday + timedelta(hours=ts[0][0], minutes=ts[0][1]),
       baseday + timedelta(hours=ts[1][0], minutes=ts[1][1]))
+    except ValueError:
+      return None
 
   wb = excel.chooseworkbook()
   if wb is None:
@@ -42,6 +45,8 @@ def load(excel):
     data["day"] = datetime(d.year, d.month, d.day)
     data["time"] = dividetime(data["day"], r.cells(4).value)
     data["resv"] = dividetime(data["day"], r.cells(6).value) if r.cells(6).value is not None else data["time"]
+    if data["time"] is None and data["resv"] is None:
+      raise ValueError("Invalid Calendar Data")
     print("{0:%m/%d} {1}".format(data["day"], data["name"]))
     datas.append(data)
 
