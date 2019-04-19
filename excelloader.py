@@ -46,3 +46,8 @@ def load(excel):
     datas.append(data)
 
   return datas
+
+if __name__ == "__main__":
+  from uwstyle.excel import Excel
+  excel = Excel()
+  data = load(excel)
