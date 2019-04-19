@@ -5,14 +5,14 @@ import re
 def load(excel):
   def dividetime(baseday, timestr):
     try:
-    ts = list(map(
-      lambda p:
-        list(map(lambda n: int(n), p.split(":"))),
-      timestr.split("～")
-    ))
-    return DateTimeRange(
-      baseday + timedelta(hours=ts[0][0], minutes=ts[0][1]),
-      baseday + timedelta(hours=ts[1][0], minutes=ts[1][1]))
+      ts = list(map(
+        lambda p:
+          list(map(lambda n: int(n), p.split(":"))),
+        timestr.split("～")
+      ))
+      return DateTimeRange(
+        baseday + timedelta(hours=ts[0][0], minutes=ts[0][1]),
+        baseday + timedelta(hours=ts[1][0], minutes=ts[1][1]))
     except ValueError:
       return None
 
