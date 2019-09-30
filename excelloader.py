@@ -41,7 +41,7 @@ def load(excel):
       "note": r.cells(8).value,
     }
     # Special Items
-    d = r.cells(1).value #pywin32type/datetime
+    lastday = d = lastday if r.cells(1).value is None else r.cells(1).value #pywin32type/datetime
     data["day"] = datetime(d.year, d.month, d.day)
     data["time"] = dividetime(data["day"], r.cells(4).value)
     data["resv"] = dividetime(data["day"], r.cells(6).value) if r.cells(6).value is not None else data["time"]
