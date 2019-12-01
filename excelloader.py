@@ -26,7 +26,7 @@ def load(excel):
   datas = []
   first = True
   print("> データ読み込み中")
-  holiday = re.compile('定\s*休\s*日')
+  holiday = re.compile('休\s*館\s*日')
   for r in table.rows:
     if first:
       first = False
