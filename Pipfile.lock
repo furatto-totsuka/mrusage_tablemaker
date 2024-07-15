@@ -408,11 +408,12 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:5c89b1a14a67ac5f0956f1cb0aeb7d1d3f4c8ba4e4e1ab7bf1af4933f9a2f0fe",
-                "sha256:675fcebecb43c32eb930481abf907619137547f4336206e4d673180242e1a278"
+                "sha256:54faa7f2e8d2d11bcd2c07bed282eef1046b5c080d1c32add737d7b5817b1ad4",
+                "sha256:f211a66637b8fa059bb28183da127d4e86396c991a942b028c6650d4319c3fd0"
             ],
-            "markers": "python_version >= '3.7'",
-            "version": "==60.2.0"
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==70.0.0"
         },
         "toml": {
             "hashes": [
